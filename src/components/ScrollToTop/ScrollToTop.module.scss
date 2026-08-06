@@ -1,0 +1,22 @@
+@use '../../styles/mixins' as *;
+
+.fab {
+  position: fixed;
+  right: var(--space-md);
+  bottom: var(--space-md);
+  z-index: var(--z-navbar);
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  color: var(--c-black);
+  background: var(--grad-primary);
+  font-size: 1.1rem;
+  box-shadow: 0 8px 26px -6px var(--c-green-glow);
+
+  @include mobile {
+    right: var(--space-sm);
+    bottom: var(--space-sm);
+  }
+}

@@ -1,0 +1,82 @@
+@use '../../styles/mixins' as *;
+
+.editor {
+  width: min(420px, 84vw);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--c-stroke-strong);
+  background: #0a0c10;
+  box-shadow: 0 30px 80px -30px rgba(0, 0, 0, 0.7);
+}
+
+.editorHeader {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: var(--space-xs) var(--space-sm);
+  background: var(--c-black-elevated);
+  border-bottom: 1px solid var(--c-stroke);
+}
+
+.dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+.red { background: #ff5f56; }
+.yellow { background: #ffbd2e; }
+.green { background: #27c93f; }
+
+.fileName {
+  margin-left: var(--space-sm);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--c-white-faint);
+}
+
+.editorBody {
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  min-height: 128px;
+}
+
+.line {
+  display: flex;
+  align-items: baseline;
+  white-space: pre;
+}
+
+.lineNumber {
+  width: 22px;
+  flex-shrink: 0;
+  color: var(--c-white-faint);
+  opacity: 0.5;
+  user-select: none;
+}
+
+.code {
+  color: var(--c-green);
+}
+
+.cursor {
+  display: inline-block;
+  width: 7px;
+  height: 14px;
+  margin-left: 2px;
+  background: var(--c-green);
+  animation: blink 0.9s step-end infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+@include reduced-motion {
+  .cursor {
+    animation: none;
+  }
+}

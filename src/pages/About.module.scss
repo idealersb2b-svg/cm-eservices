@@ -1,0 +1,583 @@
+@use '../styles/mixins' as *;
+
+// ============================================================
+// HERO
+// ============================================================
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding-top: 160px;
+  padding-bottom: var(--space-xl);
+
+  @include mobile {
+    padding-top: 130px;
+  }
+}
+
+.heroInner {
+  position: relative;
+  z-index: var(--z-content);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2xl);
+  align-items: center;
+
+  @include below(1023px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.heroCopy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.eyebrow {
+  @include eyebrow;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  width: fit-content;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--c-green);
+  box-shadow: 0 0 12px 2px var(--c-green-glow);
+}
+
+.heroTitle {
+  font-size: var(--fs-display-xl);
+  letter-spacing: -0.03em;
+}
+
+.gradientText {
+  background: var(--grad-primary);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.heroParagraph {
+  font-size: var(--fs-body-lg);
+  color: var(--c-white-dim);
+  max-width: 68ch;
+}
+
+.heroFooter {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  margin-top: var(--space-sm);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  padding: var(--space-2xs) var(--space-sm);
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--c-stroke-strong);
+  background: rgba(247, 248, 250, 0.03);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  color: var(--c-white-dim);
+}
+
+.heroActions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+.marqueeWrap {
+  position: relative;
+  z-index: var(--z-content);
+  margin-top: var(--space-2xl);
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--c-stroke);
+}
+
+// ── Hero Visual Panel ─────────────────────────────────────────────────────────
+
+.heroVisual {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  max-width: 520px;
+  justify-self: center;
+
+  @include below(1023px) {
+    display: none;
+  }
+}
+
+.heroVisualImg {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--c-stroke-strong);
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+}
+
+.heroVisualOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(34, 197, 94, 0.08) 0%,
+    transparent 50%,
+    rgba(91, 95, 246, 0.12) 100%
+  );
+}
+
+.heroRing {
+  position: absolute;
+  inset: -20px;
+  border-radius: 50%;
+  border: 1px solid rgba(34, 197, 94, 0.12);
+  animation: heroRingPulse 3.5s ease-in-out infinite;
+  pointer-events: none;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 20px;
+    border-radius: 50%;
+    border: 1px solid rgba(91, 95, 246, 0.1);
+    animation: heroRingPulse 3.5s ease-in-out infinite reverse;
+  }
+}
+
+@keyframes heroRingPulse {
+  0%, 100% { transform: scale(1);   opacity: 0.6; }
+  50%       { transform: scale(1.04); opacity: 1; }
+}
+
+// Floating stat badges
+.statBadge {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: var(--radius-pill);
+  background: rgba(13, 15, 20, 0.88);
+  border: 1px solid var(--c-stroke-strong);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  white-space: nowrap;
+  animation: badgeFloat var(--float-dur, 4s) ease-in-out infinite;
+  animation-delay: var(--float-delay, 0s);
+
+  &[data-index='0'] {
+    top: 8%;
+    right: -12%;
+    --float-dur: 4.2s;
+    --float-delay: 0s;
+  }
+  &[data-index='1'] {
+    bottom: 28%;
+    right: -14%;
+    --float-dur: 3.8s;
+    --float-delay: -1.2s;
+  }
+  &[data-index='2'] {
+    bottom: 8%;
+    left: -12%;
+    --float-dur: 4.6s;
+    --float-delay: -0.6s;
+  }
+  &[data-index='3'] {
+    top: 28%;
+    left: -14%;
+    --float-dur: 3.5s;
+    --float-delay: -2s;
+  }
+}
+
+@keyframes badgeFloat {
+  0%, 100% { transform: translateY(0px);   }
+  50%       { transform: translateY(-8px);  }
+}
+
+.statBadgeIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--badge-accent, var(--c-green));
+}
+
+.statBadgeValue {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--c-white);
+  line-height: 1;
+}
+
+.statBadgeLabel {
+  font-size: 0.68rem;
+  color: var(--c-white-dim);
+  letter-spacing: 0.02em;
+}
+
+// ============================================================
+// SHARED SECTION SPACING
+// ============================================================
+
+.section {
+  position: relative;
+  padding-block: var(--space-2xl);
+}
+
+// ============================================================
+// SECTION IMAGES
+// ============================================================
+
+.sectionImageWrap {
+  position: relative;
+  margin-top: var(--space-xl);
+  margin-bottom: var(--space-xl);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--c-stroke);
+  aspect-ratio: 16 / 5;
+
+  @include mobile {
+    aspect-ratio: 16 / 8;
+  }
+}
+
+.sectionImageWrapMission {
+  aspect-ratio: 16 / 5;
+
+  @include mobile {
+    aspect-ratio: 16 / 8;
+  }
+}
+
+.sectionImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s var(--ease-out-expo);
+
+  .sectionImageWrap:hover & {
+    transform: scale(1.03);
+  }
+}
+
+.sectionImageOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(7, 8, 11, 0.7) 0%,
+    rgba(7, 8, 11, 0.1) 50%,
+    rgba(91, 95, 246, 0.15) 100%
+  );
+}
+
+.sectionImageCaption {
+  position: absolute;
+  bottom: var(--space-md);
+  left: var(--space-lg);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2xs);
+
+  span {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    color: var(--c-white-dim);
+    background: rgba(7, 8, 11, 0.6);
+    backdrop-filter: blur(8px);
+    padding: 6px 14px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--c-stroke-strong);
+  }
+}
+
+// ============================================================
+// PURPOSE TRIAD
+// ============================================================
+
+.triadGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+  margin-top: var(--space-xl);
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+// ============================================================
+// WHO WE ARE
+// ============================================================
+
+.whoSection {
+  position: relative;
+  overflow: hidden;
+  padding-block: var(--space-2xl);
+}
+
+.whoBlobs {
+  opacity: 0.55;
+}
+
+.whoInner {
+  position: relative;
+  z-index: var(--z-content);
+}
+
+.whoLead {
+  margin-top: var(--space-md);
+  font-size: var(--fs-body-lg);
+  line-height: 1.7;
+  color: var(--c-white-dim);
+  max-width: 78ch;
+}
+
+.whoGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+  margin-top: var(--space-xl);
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+// ============================================================
+// WHAT WE DO
+// ============================================================
+
+.servicesGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-md);
+  margin-top: var(--space-xl);
+
+  @include tablet {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+// ============================================================
+// TESTIMONIALS
+// ============================================================
+
+.testimonialsSection {
+  position: relative;
+  overflow: hidden;
+  padding-block: var(--space-2xl);
+}
+
+.testimonialBlobs {
+  opacity: 0.4;
+}
+
+.testimonialWrap {
+  position: relative;
+  z-index: var(--z-content);
+  margin-top: var(--space-xl);
+  max-width: 860px;
+  margin-inline: auto;
+}
+
+.testimonialCard {
+  position: relative;
+  background: var(--c-black-elevated);
+  border: 1px solid var(--c-stroke-strong);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl) var(--space-2xl);
+  overflow: hidden;
+
+  // Gradient glow corner
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 220px;
+    height: 220px;
+    background: radial-gradient(circle, rgba(34, 197, 94, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(91, 95, 246, 0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  @include mobile {
+    padding: var(--space-lg) var(--space-md);
+  }
+}
+
+.quoteIconWrap {
+  position: absolute;
+  top: var(--space-md);
+  right: var(--space-lg);
+  opacity: 0.6;
+}
+
+.testimonialInner {
+  position: relative;
+  z-index: 1;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.testimonialQuote {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+  font-weight: 500;
+  line-height: 1.65;
+  color: var(--c-white);
+  letter-spacing: -0.01em;
+  margin: 0;
+  font-style: italic;
+}
+
+.testimonialMeta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.testimonialAvatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--grad-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--c-black);
+  flex-shrink: 0;
+  box-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
+}
+
+.testimonialName {
+  font-weight: 600;
+  color: var(--c-white);
+  font-size: var(--fs-body-md);
+  margin: 0;
+}
+
+.testimonialRole {
+  font-size: var(--fs-body-sm);
+  color: var(--c-white-faint);
+  margin: 0;
+  margin-top: 2px;
+}
+
+.testimonialStars {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  margin-left: auto;
+  color: #f59e0b;
+
+  @include mobile {
+    margin-left: 0;
+  }
+}
+
+// ── Controls
+
+.testimonialControls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+}
+
+.testimonialBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--c-stroke-strong);
+  background: rgba(247, 248, 250, 0.04);
+  color: var(--c-white-dim);
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: rgba(34, 197, 94, 0.1);
+    border-color: var(--c-green);
+    color: var(--c-green);
+    transform: scale(1.08);
+  }
+}
+
+.testimonialDots {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2xs);
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  background: var(--c-stroke-strong);
+  transition: all 0.3s var(--ease-out-expo);
+  padding: 0;
+
+  &:hover {
+    background: var(--c-white-faint);
+  }
+}
+
+.dotActive {
+  width: 24px;
+  border-radius: var(--radius-pill);
+  background: var(--grad-primary);
+}

@@ -1,0 +1,145 @@
+@use '../../styles/mixins' as *;
+
+// ---- Neural network canvas ----
+.canvasLayer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  contain: strict;
+}
+
+// ---- Digital grid ----
+.gridLayer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  contain: paint;
+}
+
+.gridLines {
+  position: absolute;
+  inset: -1px;
+  background-image:
+    linear-gradient(var(--c-stroke) 1px, transparent 1px),
+    linear-gradient(90deg, var(--c-stroke) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%);
+}
+
+.gridSpotlight {
+  position: absolute;
+  inset: 0;
+  background: var(--grad-radial-glow);
+}
+
+// ---- Animated grid (hero only) ----
+// Mask lives on the outer wrapper and stays fixed; only the inner
+// line pattern translates, so the radial fade doesn't drift with it.
+// Moves by exactly one tile (56px) so the loop is seamless, and uses
+// `transform` only — no `background-position` — so it's handled by
+// the compositor instead of triggering a repaint every frame.
+.heroGridMask {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%);
+}
+
+.heroGridLines {
+  position: absolute;
+  inset: -60px;
+  background-image:
+    linear-gradient(var(--c-stroke) 1px, transparent 1px),
+    linear-gradient(90deg, var(--c-stroke) 1px, transparent 1px);
+  background-size: 56px 56px;
+  animation: heroGridScroll 9s linear infinite;
+  will-change: transform;
+}
+
+@keyframes heroGridScroll {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(0, -56px, 0); }
+}
+
+@include reduced-motion {
+  .heroGridLines {
+    animation: none;
+  }
+}
+
+// ---- Hero gradient (green/black, CSS-only) ----
+.heroGradient {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background: var(--c-black);
+  contain: paint;
+}
+
+.heroGlow {
+  position: absolute;
+  top: -25%;
+  left: 50%;
+  width: 130%;
+  aspect-ratio: 1.6 / 1;
+  transform: translate(-50%, 0) scale(1);
+  background: radial-gradient(
+    ellipse at center,
+    rgba(34, 197, 94, 0.32) 0%,
+    rgba(34, 197, 94, 0.12) 32%,
+    rgba(18, 121, 63, 0.05) 55%,
+    transparent 72%
+  );
+  filter: blur(50px);
+  animation: heroGlowDrift 20s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+@keyframes heroGlowDrift {
+  from { transform: translate(-51%, -2%) scale(1); }
+  to { transform: translate(-49%, 3%) scale(1.06); }
+}
+
+@include reduced-motion {
+  .heroGlow {
+    animation: none;
+  }
+}
+
+// ---- Blobs ----
+.blobLayer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  filter: blur(70px);
+  contain: paint;
+}
+
+.blob {
+  position: absolute;
+  width: 42vw;
+  height: 42vw;
+  max-width: 560px;
+  max-height: 560px;
+  border-radius: 50%;
+  opacity: 0.35;
+}
+
+.blobGreen {
+  top: -10%;
+  left: -8%;
+  background: radial-gradient(circle, var(--c-green) 0%, transparent 70%);
+}
+
+.blobIndigo {
+  bottom: -15%;
+  right: -8%;
+  background: radial-gradient(circle, var(--c-indigo) 0%, transparent 70%);
+}

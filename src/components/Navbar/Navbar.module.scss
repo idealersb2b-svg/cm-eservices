@@ -1,0 +1,382 @@
+@use '../../styles/mixins' as *;
+
+// ============================================================
+// NAVBAR SHELL
+// ============================================================
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-navbar);
+  padding-block: var(--space-sm);
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition: background var(--dur-mid) var(--ease-out-expo),
+    border-color var(--dur-mid) var(--ease-out-expo),
+    padding var(--dur-mid) var(--ease-out-expo);
+}
+
+.scrolled {
+  padding-block: var(--space-xs);
+  @include glass(0.55);
+  border-bottom: 1px solid var(--c-stroke);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.logoImg {
+  height: 34px;
+  width: auto;
+
+  @include mobile {
+    height: 28px;
+  }
+}
+
+// ============================================================
+// DESKTOP NAV
+// ============================================================
+
+.desktopNav {
+  display: none;
+  align-items: center;
+  gap: var(--space-lg);
+
+  @include desktop {
+    display: flex;
+  }
+}
+
+.navLink,
+.navLinkExternal {
+  position: relative;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--c-white-dim);
+  padding-block: 4px;
+  transition: color var(--dur-fast) var(--ease-out-expo);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 0;
+    height: 1.5px;
+    background: var(--grad-primary);
+    transition: width var(--dur-mid) var(--ease-out-expo);
+  }
+
+  &:hover,
+  &.active {
+    color: var(--c-white);
+  }
+  &:hover::after,
+  &.active::after {
+    width: 100%;
+  }
+}
+
+.externalIcon {
+  font-size: 0.8em;
+  opacity: 0.7;
+}
+
+// ---- dropdown-capable nav item ----
+.navItem {
+  position: relative;
+}
+
+.navTrigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--c-white-dim);
+  transition: color var(--dur-fast) var(--ease-out-expo);
+
+  &:hover { color: var(--c-white); }
+  &[aria-expanded='true'] { color: var(--c-white); }
+}
+
+.navLabel {
+  pointer-events: none;
+}
+
+.chevron {
+  font-size: 0.75rem;
+  transform: rotate(90deg);
+  transition: transform var(--dur-mid) var(--ease-out-expo);
+}
+.navTrigger[aria-expanded='true'] .chevron {
+  transform: rotate(-90deg);
+}
+
+// ============================================================
+// DROPDOWN PANEL
+// ============================================================
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 18px);
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 320px;
+  padding: var(--space-2xs);
+  border-radius: var(--radius-md);
+  @include glass(0.9);
+  background: var(--c-black-elevated);
+  border: 1px solid var(--c-stroke-strong);
+  box-shadow: 0 24px 60px -20px rgba(0, 0, 0, 0.6);
+}
+
+.dropdownList {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.dropdownItem {
+  position: relative;
+}
+
+.dropdownLink,
+.submenuTrigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-sm);
+  transition: background var(--dur-fast) var(--ease-out-expo);
+  cursor: pointer;
+}
+.dropdownLink:hover,
+.submenuTrigger:hover {
+  background: rgba(247, 248, 250, 0.05);
+}
+
+.entryText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.entryTitle {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 0.92rem;
+  color: var(--c-white);
+}
+
+.entryDesc {
+  font-size: 0.78rem;
+  color: var(--c-white-faint);
+}
+
+.entryArrow {
+  flex-shrink: 0;
+  color: var(--c-green);
+  opacity: 0.8;
+}
+
+// ---- nested submenu (IT Services) ----
+.submenu {
+  position: absolute;
+  top: -4px;
+  left: calc(100% + 10px);
+  min-width: 240px;
+  padding: var(--space-2xs);
+  border-radius: var(--radius-md);
+  background: var(--c-black-elevated);
+  border: 1px solid var(--c-stroke-strong);
+  box-shadow: 0 24px 60px -20px rgba(0, 0, 0, 0.6);
+}
+
+.submenuLink {
+  display: block;
+  padding: var(--space-2xs) var(--space-sm);
+  border-radius: var(--radius-sm);
+  font-size: 0.88rem;
+  color: var(--c-white-dim);
+  transition: background var(--dur-fast) var(--ease-out-expo), color var(--dur-fast) var(--ease-out-expo);
+
+  &:hover {
+    background: rgba(34, 197, 94, 0.08);
+    color: var(--c-green);
+  }
+}
+
+// ============================================================
+// ACTIONS / HAMBURGER
+// ============================================================
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.ctaDesktop {
+  display: none;
+  @include desktop {
+    display: inline-flex;
+  }
+}
+
+.hamburger {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  font-size: 1.25rem;
+  color: var(--c-white);
+  background: rgba(247, 248, 250, 0.05);
+  border: 1px solid var(--c-stroke);
+
+  @include desktop {
+    display: none;
+  }
+}
+
+// ============================================================
+// MOBILE DRAWER
+// ============================================================
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-drawer);
+  background: rgba(4, 5, 7, 0.7);
+  backdrop-filter: blur(4px);
+}
+
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: calc(var(--z-drawer) + 1);
+  width: min(86vw, 380px);
+  display: flex;
+  flex-direction: column;
+  background: var(--c-black-soft);
+  border-left: 1px solid var(--c-stroke-strong);
+  padding: var(--space-md);
+  overflow-y: auto;
+}
+
+.drawerHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: var(--space-sm);
+  border-bottom: 1px solid var(--c-stroke);
+  margin-bottom: var(--space-sm);
+}
+
+.drawerTitle {
+  @include eyebrow;
+}
+
+.drawerClose {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  font-size: 1.1rem;
+  background: rgba(247, 248, 250, 0.05);
+  border: 1px solid var(--c-stroke);
+  color: var(--c-white);
+}
+
+.drawerNav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3xs);
+  flex: 1;
+}
+
+.drawerBlock {
+  border-bottom: 1px solid var(--c-stroke);
+}
+
+.drawerLink {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding-block: var(--space-sm);
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--c-white);
+  gap: var(--space-2xs);
+}
+
+.drawerChevron {
+  transition: transform var(--dur-mid) var(--ease-out-expo);
+}
+.rotated {
+  transform: rotate(180deg);
+}
+
+.drawerSubList {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding-left: var(--space-sm);
+  padding-bottom: var(--space-2xs);
+}
+
+.drawerSubLink {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-block: var(--space-2xs);
+  font-size: 0.92rem;
+  color: var(--c-white-dim);
+  gap: var(--space-2xs);
+
+  &:hover { color: var(--c-green); }
+}
+
+.drawerSubSubList {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding-left: var(--space-sm);
+}
+
+.drawerSubSubLink {
+  padding-block: var(--space-3xs);
+  font-size: 0.86rem;
+  color: var(--c-white-faint);
+
+  &:hover { color: var(--c-green); }
+}
+
+.drawerFooter {
+  padding-top: var(--space-md);
+}

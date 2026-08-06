@@ -1,0 +1,41 @@
+@use '../../styles/mixins' as *;
+
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-loader);
+  display: grid;
+  place-items: center;
+  background: var(--c-black);
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.barTrack {
+  width: min(420px, 84vw);
+  height: 2px;
+  border-radius: var(--radius-pill);
+  background: var(--c-stroke);
+  overflow: hidden;
+}
+
+.barFill {
+  height: 100%;
+  width: 100%;
+  transform-origin: left;
+  background: var(--grad-primary);
+}
+
+.tag {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 2.4vw, 1.5rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--c-white);
+  text-align: center;
+}

@@ -1,0 +1,49 @@
+@use '../../styles/mixins' as *;
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  height: 100%;
+  padding: var(--space-lg);
+  border-radius: var(--radius-lg);
+  background: var(--c-black-elevated);
+  border: 1px solid var(--c-stroke);
+  transition: transform var(--dur-mid) var(--ease-out-expo),
+    border-color var(--dur-mid) var(--ease-out-expo),
+    box-shadow var(--dur-mid) var(--ease-out-expo);
+
+  &:hover {
+    transform: translateY(-6px);
+    border-color: var(--c-stroke-strong);
+    box-shadow: 0 24px 50px -20px rgba(0, 0, 0, 0.55);
+  }
+
+  &:hover .iconBadge {
+    color: var(--c-black);
+    background: var(--grad-primary);
+  }
+}
+
+.iconBadge {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: var(--radius-sm);
+  font-size: 1.1rem;
+  color: var(--c-green);
+  background: rgba(34, 197, 94, 0.1);
+  transition: all var(--dur-mid) var(--ease-out-expo);
+}
+
+.title {
+  font-size: 1.05rem;
+  line-height: 1.3;
+}
+
+.description {
+  color: var(--c-white-dim);
+  font-size: var(--fs-body-sm);
+  flex: 1;
+}

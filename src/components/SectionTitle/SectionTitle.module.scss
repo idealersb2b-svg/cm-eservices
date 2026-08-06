@@ -1,0 +1,49 @@
+@use '../../styles/mixins' as *;
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  max-width: 720px;
+}
+
+.center {
+  align-items: center;
+  text-align: center;
+  margin-inline: auto;
+}
+
+.left {
+  align-items: flex-start;
+  text-align: left;
+}
+
+.eyebrow {
+  @include eyebrow;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2xs);
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--c-green);
+  box-shadow: 0 0 12px 2px var(--c-green-glow);
+}
+
+.title {
+  font-size: var(--fs-display-lg);
+  letter-spacing: -0.02em;
+  background: linear-gradient(180deg, var(--c-white) 0%, var(--c-white-dim) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.description {
+  font-size: var(--fs-body-lg);
+  color: var(--c-white-dim);
+  max-width: 56ch;
+}

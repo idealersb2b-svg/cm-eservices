@@ -1,0 +1,80 @@
+// ============================================================
+// DESIGN TOKENS — CM-eServices
+// Palette: Leaf Green / Carbon Black / Indigo Blue / White
+// ============================================================
+
+:root {
+  // ---- Core palette ----
+  --c-black: #07080b;          // carbon black — page background
+  --c-black-soft: #0d0f14;     // raised surface
+  --c-black-elevated: #12141b; // card surface
+  --c-stroke: rgba(247, 248, 250, 0.08);
+  --c-stroke-strong: rgba(247, 248, 250, 0.16);
+
+  --c-green: #22c55e;          // leaf green — primary accent
+  --c-green-dark: #12793f;
+  --c-green-glow: rgba(34, 197, 94, 0.35);
+
+  --c-indigo: #5b5ff6;         // indigo blue — secondary accent
+  --c-indigo-soft: #8b8dff;
+  --c-indigo-glow: rgba(91, 95, 246, 0.35);
+
+  --c-white: #f7f8fa;
+  --c-white-dim: rgba(247, 248, 250, 0.68);
+  --c-white-faint: rgba(247, 248, 250, 0.4);
+
+  // ---- Gradients ----
+  --grad-primary: linear-gradient(135deg, var(--c-green) 0%, var(--c-indigo) 100%);
+  --grad-radial-glow: radial-gradient(circle at 50% 0%, rgba(91, 95, 246, 0.18), transparent 60%);
+  --grad-mesh: radial-gradient(at 20% 20%, rgba(34, 197, 94, 0.16) 0px, transparent 50%),
+    radial-gradient(at 80% 0%, rgba(91, 95, 246, 0.18) 0px, transparent 50%),
+    radial-gradient(at 50% 100%, rgba(34, 197, 94, 0.1) 0px, transparent 50%);
+
+  // ---- Typography ----
+  --font-display: 'Space Grotesk', 'Segoe UI', sans-serif;
+  --font-body: 'Inter', 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+
+  // ---- Type scale ----
+  --fs-display-xl: clamp(2.75rem, 6vw, 5.5rem);
+  --fs-display-lg: clamp(2.25rem, 4.5vw, 3.75rem);
+  --fs-display-md: clamp(1.75rem, 3vw, 2.5rem);
+  --fs-display-sm: clamp(1.375rem, 2vw, 1.75rem);
+  --fs-body-lg: 1.125rem;
+  --fs-body-md: 1rem;
+  --fs-body-sm: 0.875rem;
+  --fs-eyebrow: 0.75rem;
+
+  // ---- Spacing ----
+  --space-3xs: 0.25rem;
+  --space-2xs: 0.5rem;
+  --space-xs: 0.75rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2.5rem;
+  --space-xl: 4rem;
+  --space-2xl: 6rem;
+  --space-3xl: 9rem;
+
+  // ---- Layout ----
+  --container-width: 1280px;
+  --container-pad: clamp(1.25rem, 5vw, 3rem);
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-pill: 999px;
+
+  // ---- Motion ----
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --dur-fast: 0.2s;
+  --dur-mid: 0.4s;
+  --dur-slow: 0.8s;
+
+  // ---- Z-index scale ----
+  --z-bg: 0;
+  --z-content: 10;
+  --z-navbar: 100;
+  --z-drawer: 200;
+  --z-loader: 999;
+}
