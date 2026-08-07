@@ -377,21 +377,59 @@ const REELS = [
 ]
 
 const VIDEOS = [
-  { id: 'v1', title: 'AI Revolution: What 2025 Holds', category: 'Tech Documentary', duration: '12:30', views: '124K', color: '#22c55e', description: 'An in-depth exploration of how artificial intelligence is reshaping industries globally.' },
-  { id: 'v2', title: 'Building a SaaS from Scratch', category: 'Tutorial Series', duration: '45:10', views: '87K', color: '#5b5ff6', description: 'Complete walkthrough of building a SaaS product from idea to production launch.' },
-  { id: 'v3', title: 'Design Thinking Masterclass', category: 'Educational', duration: '28:50', views: '63K', color: '#fb923c', description: 'Deep-dive into design thinking principles with real-world case studies.' },
-  { id: 'v4', title: 'CM-eServices Company Story', category: 'Brand Video', duration: '6:45', views: '41K', color: '#f43f5e', description: 'Cinematic brand documentary about CM-eServices\' journey and mission.' },
-  { id: 'v5', title: 'Web3 & Blockchain Explained', category: 'Tech Explainer', duration: '18:22', views: '95K', color: '#a855f7', description: 'Breaking down Web3 concepts for developers and business leaders.' },
-  { id: 'v6', title: 'The Future of Remote Work', category: 'Business Insight', duration: '22:15', views: '78K', color: '#06b6d4', description: 'Expert panel discussion on remote work culture, tools, and future trends.' },
+  {
+    id: 'v1', title: '1.7 Earths Needed. 1 Earth Left. Do the Math.',
+    category: 'Climate Literacy', duration: '03:25',
+    views: '124K', color: '#22c55e',
+    description: 'An in-depth exploration of how artificial intelligence is reshaping industries globally.',
+    url: 'https://youtu.be/eNEH5j6bYrs?si=-2Fjo-6KSeSaISMo',
+  },
+  {
+    id: 'v2', title: 'Your Carbon Footprint more than Cars or Cash? ',
+    category: 'Climate Literacy', duration: '03:06',
+    views: '87K', color: '#5b5ff6',
+    description: 'Complete walkthrough of building a SaaS product from idea to production launch.',
+    url: 'https://youtu.be/_JkX8wTwdPE?si=R5vEuPNrvdcR-ySP',
+  },
+  {
+    id: 'v3', title: 'Sparrow Population Collapse Just Hit Critical Levels',
+    category: 'Climate Literacy', duration: '28:50',
+    views: '63K', color: '#fb923c',
+    description: 'Deep-dive into design thinking principles with real-world case studies.',
+    url: 'https://youtu.be/p8qBkaYk1N4?si=si9uqypP9uF7RGHc',
+  },
+  {
+    id: 'v4', title: 'The huge Climate Literacy Gap',
+    category: 'Climate Literacy', duration: '02:50',
+    views: '41K', color: '#f43f5e',
+    description: 'Cinematic brand documentary about CM-eServices\' journey and mission.',
+    url: 'https://youtu.be/aT-sibX4Vx4?si=ii290sO-msWe05YP',
+  },
+  {
+    id: 'v5', title: '50°C Heatwaves & AC Catastropic Spiral Will END Us!',
+    category: 'Climate Literacy', duration: '18:22',
+    views: '95K', color: '#a855f7',
+    description: 'Breaking down Web3 concepts for developers and business leaders.',
+    url: 'https://youtu.be/rl1SdSXRBys?si=12-fJP7ImNx7MAC3',
+  },
 ]
 
 const ANIMATED = [
-  { id: 'a1', title: 'How AI Learns – Explained', style: '2D Animation', duration: '5:20', views: '210K', color: '#5b5ff6', description: 'A fun, accessible cartoon explaining how machine learning models are trained.' },
-  { id: 'a2', title: 'The Digital World Journey', style: '3D Motion', duration: '8:45', views: '156K', color: '#22c55e', description: 'A stunning 3D animated journey through the evolution of the internet.' },
-  { id: 'a3', title: 'CyberSafe Kids – Episode 1', style: 'Character Animation', duration: '11:30', views: '342K', color: '#f43f5e', description: 'Child-friendly animated series teaching online safety fundamentals.' },
-  { id: 'a4', title: 'FinanceBot Explains Taxes', style: '2D Explainer', duration: '6:15', views: '98K', color: '#fb923c', description: 'A charming animated character explains tax concepts in simple terms.' },
-  { id: 'a5', title: 'Space Data Visualization', style: '3D Data Viz', duration: '4:50', views: '183K', color: '#a855f7', description: 'Breathtaking 3D animation of planetary data and astronomical phenomena.' },
-  { id: 'a6', title: 'Brand World – NovaTech', style: 'Motion Branding', duration: '3:30', views: '67K', color: '#06b6d4', description: 'An animated brand world showcasing NovaTech\'s identity in motion.' },
+  {
+    id: 'a1', title: 'क्या सभी को शहर का सपना देखना चाहिए? एक परिवार का जवाब (Ep1)',
+    style: 'Pixar-Style Animation', duration: '07:36', views: '8.2k',
+    color: '#5b5ff6',
+    description: 'A fun, accessible cartoon explaining how machine learning models are trained.',
+    url: 'https://youtu.be/Cme4XEimPsY?si=sYMA-aDPffDBkWPc',
+  },
+  {
+    id: 'a2', title: 'शहर vs गाँव | कौन जीता? देखिए इस परिवार की कहानी',
+    style: 'Pixar-Style Animation', duration: '09:02', views: '3.1K',
+    color: '#22c55e',
+    description: 'A stunning 3D animated journey through the evolution of the internet.',
+    url: 'https://youtu.be/ls0QgVx-QcM?si=qcOK4K27Fyr46UKR',
+  },
+
 ]
 
 const AI_TUNES = [
@@ -853,15 +891,15 @@ function useYouTubeDuration(url, defaultDuration) {
                 const formatted = formatDuration(sec)
                 if (formatted) setDuration(formatted)
               }
-              try { player?.destroy(); div.remove() } catch (_) {}
+              try { player?.destroy(); div.remove() } catch (_) { }
             },
             onError: () => {
-              try { player?.destroy(); div.remove() } catch (_) {}
+              try { player?.destroy(); div.remove() } catch (_) { }
             },
           },
         })
       } catch (_) {
-        try { div.remove() } catch (_) {}
+        try { div.remove() } catch (_) { }
       }
     }
 
@@ -879,7 +917,7 @@ function useYouTubeDuration(url, defaultDuration) {
       try {
         player?.destroy()
         div.remove()
-      } catch (_) {}
+      } catch (_) { }
     }
   }, [url, defaultDuration])
 
@@ -913,7 +951,7 @@ function useYouTubeViews(url, defaultViews) {
               return
             }
           }
-        } catch (_) {}
+        } catch (_) { }
       }
 
       // Fallback to public API endpoints
@@ -934,7 +972,7 @@ function useYouTubeViews(url, defaultViews) {
               break
             }
           }
-        } catch (_) {}
+        } catch (_) { }
       }
     }
 
